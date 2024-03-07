@@ -1,12 +1,16 @@
 import React from 'react';
 import {View, StyleSheet, Text, Image} from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+
 
 const CalenderMainPage: React.FC = () => {
+  const navigation = useNavigation<any>();
+
   return (
     <View>
       <View style={styles.myContainertwo}>
         <View style={{flexDirection:"row"}}>
-      <Text style={styles.select}>Select</Text>
+      <Text style={styles.select} onPress={()=>navigation.navigate("CalenderDayPage")}>Select</Text>
 
       <Text style={styles.heading}>Calendar</Text>
       </View>

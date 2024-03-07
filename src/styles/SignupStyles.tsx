@@ -11,6 +11,13 @@ const SignupStyles = StyleSheet.create({
       left: 6,
       marginTop: '3%',
     },
+    eyeIcon: {
+      position: 'absolute',
+      top: 30,
+      right: 10,
+      width: 24,
+      height: 24,
+    },
     input: {
       width: 350,
       height: 50,
@@ -53,9 +60,10 @@ const SignupStyles = StyleSheet.create({
     checkboxContainer: {
       flexDirection: 'row',
       alignItems: 'center',
-      marginBottom: 15,
+      marginBottom: 1,
       width: 316,
-      height: 35,
+      
+      height: 55,
       top: 45,
     },
     checkboxLabel: {
@@ -69,7 +77,7 @@ const SignupStyles = StyleSheet.create({
       color: 'black',
     },
     textTerm: {
-      marginLeft: '1%',
+      marginLeft: '10%',
       fontSize: 15,
       color: 'black',
     },

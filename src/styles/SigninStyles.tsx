@@ -12,8 +12,38 @@ const SignInStyles = StyleSheet.create({
       flexDirection: 'row',
       alignItems: 'center',
     },
+    drawer: {
+      width: 20,
+  height: 14,
+  top: 22,
+  left: 5,
+  backgroundColor:"white"
+  
+   
+    },
+    checkboxContainer: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      marginBottom: 1,
+      width: 316,
+      
+      height: 55,
+      top: 45,
+    },
+      image: {
+    width: 20,
+    height: 20,
+    marginTop:"5%",
+    marginLeft: '20%',
+  },
+  imageStyle: {
+    flex: 1,
+    width: '100%',
+    height: '100%',
+  },
     input: {
       width: 350,
+
       height: 50,
       backgroundColor: 'white',
       color: 'black',
@@ -77,7 +107,7 @@ const SignInStyles = StyleSheet.create({
     checkboxContainer: {
       flexDirection: 'row',
       alignItems: 'center',
-      marginTop: 26,
+      marginTop: 40,
     },
     checkboxLabel: {
       marginLeft: 2,

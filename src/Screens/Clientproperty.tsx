@@ -74,7 +74,7 @@ const Clientproperty: React.FC = ({navigation}:any) => {
         Property Rejected by Client
                 </Text>
       </View>
-      <BottomBar/>
+      {/* <BottomBar/> */}
     </View>
   );
 };

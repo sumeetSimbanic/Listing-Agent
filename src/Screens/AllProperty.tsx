@@ -1,18 +1,73 @@
-import React, {useState} from 'react';
-import {View, StyleSheet, Text, Image,TouchableOpacity, TouchableHighlight} from 'react-native';
-import {ScrollView} from 'react-native-gesture-handler';
-import {TextInput, List, Avatar} from 'react-native-paper';
+import React, { useState } from 'react';
+import { View, StyleSheet, Text, Image, TextInput, ScrollView, TouchableHighlight } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+
+const PropertyItem: React.FC<{ imageSource: any, address: string, details: string }> = ({ imageSource, address, details }) => (
+  <View style={propertyStyles.container}>
+    <View style={propertyStyles.imageContainer}>
+      <Image
+        style={propertyStyles.imageStyle}
+        source={imageSource}
+        resizeMode="cover"
+      />
+    </View>
+
+    <View style={propertyStyles.addressContainer}>
+      <Text style={propertyStyles.addressText}>
+        {address}{'\n'}
+        {details}
+      </Text>
+    </View>
+  </View>
+);
 
 const AllProperty: React.FC = () => {
   const [search, setSearch] = useState<string>('');
   const navigation = useNavigation<any>();
 
+  const propertyData = [
+    
+      
+        {
+          imageSource: require('../../images/property.jpg'),
+          "address": "479 Homestead Dr, North Tonawanda, NY 14120",
+          "details": "bd 3 ba 1, 998 sqft\n$369,900"
+        },
+        {
+          
+          imageSource: require('../../images/property.jpg'),
+          "address": "479 Homestead Dr, North Tonawanda, NY 14120",
+          "details": "bd 3 ba 1, 998 sqft\n$369,900"
+        },
+        {
+          imageSource: require('../../images/property.jpg'),
+          "address": "479 Homestead Drrr, North Tonawanda, NY 14120",
+          "details": "bd 3 ba 1, 998 sqft\n$369,900"
+        },
+        {
+          imageSource: require('../../images/property.jpg'),
+          "address": "479 Homestead Dr, North Tonawanda, NY 14120",
+          "details": "bd 3 ba 1, 998 sqft\n$369,900"
+        },
+        {
+          imageSource: require('../../images/property.jpg'),
+          "address": "479 Homestead Dr, North Tonawanda, NY 14120",
+          "details": "bd 3 ba 1, 998 sqft\n$369,900"
+        },
+        {
+          imageSource: require('../../images/property.jpg'),
+          "address": "479 Homestead Dr, North Tonawanda, NY 14120",
+          "details": "bd 3 ba 1, 998 sqft\n$369,900"
+        }
+      ]
+    
+    
+  
+
   return (
-    <View style={{backgroundColor: 'white'}}>
-      <View style={{flexDirection: 'row'}}>
-        
-      <TouchableHighlight onPress={() => navigation.navigate('Menu')}>
+    <View style={styles.container}>
+      <View style={styles.header}>
+        <TouchableHighlight onPress={() => navigation.navigate('Menu')}>
           <Image
             style={styles.drawer}
             source={require('../../images/bars.png')}
@@ -22,136 +77,98 @@ const AllProperty: React.FC = () => {
         <Text style={styles.heading}>Properties</Text>
       </View>
 
-      <TextInput
-        value={search}
-        label="Search..."
-        onChangeText={text => setSearch(text)}
-        style={styles.input}
-      />
+      <View style={styles.searchContainer}>
+        <Image
+          source={require('../../images/search.png')}
+          style={styles.imageSearch}
+        />
+        <TextInput
+          value={search}
+          placeholder='Search...'
+          onChangeText={text => setSearch(text)}
+          style={styles.input}
+        />
+      </View>
 
       <View style={styles.divider}></View>
+
       <ScrollView>
-        <View style={{flexDirection: 'row'}}>
-          <View style={styles.image}>
-            <Image
-              style={styles.imageStyle}
-              source={require('../../images/property.jpg')}
-              resizeMode="cover"
-            />
-          </View>
-
-          <View style={styles.addressContainer}>
-            <Text style={styles.addressText}>
-              479 Homestead Dr, North Tonawanda, NY 14120{'\n'}
-              bd 3 ba 1, 998 sqft{'\n'}
-              $369,900
-            </Text>
-          </View>
-        </View>
-
-        <View style={styles.divider}></View>
-        <View style={{flexDirection: 'row'}}>
-          <View style={styles.image}>
-            <Image
-              style={styles.imageStyle}
-              source={require('../../images/property.jpg')}
-              resizeMode="cover"
-            />
-          </View>
-
-          <View style={styles.addressContainer}>
-            <Text style={styles.addressText}>
-              479 Homestead Dr, North Tonawanda, NY 14120{'\n'}
-              bd 3 ba 1, 998 sqft{'\n'}
-              $369,900
-            </Text>
-          </View>
-        </View>
-        <View style={styles.divider}></View>
-        <View style={{flexDirection: 'row'}}>
-          <View style={styles.image}>
-            <Image
-              style={styles.imageStyle}
-              source={require('../../images/property.jpg')}
-              resizeMode="cover"
-            />
-          </View>
-
-          <View style={styles.addressContainer}>
-            <Text style={styles.addressText}>
-              479 Homestead Dr, North Tonawanda, NY 14120{'\n'}
-              bd 3 ba 1, 998 sqft{'\n'}
-              $369,900
-            </Text>
-          </View>
-        </View>
-        <View style={styles.divider}></View>
-        <View style={{flexDirection: 'row'}}>
-          <View style={styles.image}>
-            <Image
-              style={styles.imageStyle}
-              source={require('../../images/property.jpg')}
-              resizeMode="cover"
-            />
-          </View>
-
-          <View style={styles.addressContainer}>
-            <Text style={styles.addressText}>
-              479 Homestead Dr, North Tonawanda, NY 14120{'\n'}
-              bd 3 ba 1, 998 sqft{'\n'}
-              $369,900
-            </Text>
-          </View>
-        </View>
+        {propertyData.map((property, index) => (
+          <React.Fragment key={index}>
+            <PropertyItem {...property} />
+            <View style={styles.divider}></View>
+          </React.Fragment>
+        ))}
       </ScrollView>
     </View>
-
   );
 };
 
 const styles = StyleSheet.create({
-  myContainer: {
-    width: '100%',
-    height: 82,
-    top: 1,
-    backgroundColor: '#EFE6E6',
+  container: {
+    backgroundColor: 'white',
   },
-  myContainertwo: {
-    width: '100%',
-    height: 82,
-    top: 1,
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   drawer: {
     width: 20,
-height: 14,
-top: 22,
-left: 5,
-backgroundColor:"white"
-
- 
+    
+    height: 14,
+    top: 10,
+    left: 5,
+    backgroundColor: "white",
+  },
+  heading: {
+    fontSize: 20,
+    fontWeight: '700',
+    paddingLeft: 15,
+    marginTop: 15,
+    color: 'gray',
+    fontFamily: 'Inria Serif',
+  },
+  searchContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginLeft: '4%',
+  },
+  imageSearch: {
+    width: 24,
+    height: 24,
+    position: 'absolute',
+    left: 30,
+    zIndex: 1,
+    top: 25,
   },
   input: {
-    width: 335,
+    flex: 1,
+    width: '100%',
     height: 48,
     marginLeft: '4%',
     backgroundColor: 'white',
     color: 'black',
+    paddingLeft: "15%",
     borderRadius: 9,
     borderColor: 'black',
     borderWidth: 1,
-    marginBottom: 20,
-  },
-  heading: {
     marginBottom: 10,
-    fontWeight: '700',
-    paddingLeft: 15,
-    marginTop: 15,
-    fontSize: 20,
+    marginTop: 10,
+    marginRight:25,
 
-    color: '#000000',
-    fontFamily: 'Inria Serif',
   },
-  image: {
+  divider: {
+    borderBottomWidth: 1,
+    borderBottomColor: '#ddd',
+    marginVertical: 10,
+  },
+});
+
+const propertyStyles = StyleSheet.create({
+  container: {
+    flexDirection: 'row',
+  },
+  imageContainer: {
     width: 166,
     height: 107,
     margin: '4%',
@@ -176,45 +193,6 @@ backgroundColor:"white"
     letterSpacing: 0,
     textAlign: 'left',
     fontFamily: 'Inria Serif',
-  },
-  scheduleContainer: {
-    width: '100%',
-    height: 16,
-    marginBottom: '1%',
-    alignItems: 'center',
-  },
-  scheduleText: {
-    fontSize: 15,
-    fontWeight: '400',
-    lineHeight: 18,
-    letterSpacing: 0,
-    fontFamily: 'Inria Serif',
-    textAlign: 'center',
-    color: '#1B00BF',
-  },
-  divider: {
-    width: '100%',
-    height: 1,
-    backgroundColor: '#D7CCCC',
-  },
-  text: {
-    width: 144,
-    height: 24,
-    fontWeight: '700',
-    top: 32,
-    left: 143,
-  },
-  title: {
-    fontSize: 20,
-
-    fontWeight: 'bold',
-    fontFamily: 'Inria Serif',
-  },
-  paragraph: {
-    width: 179,
-    height: 115,
-    top: 275,
-    left: 232,
   },
 });
 

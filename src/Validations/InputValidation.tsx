@@ -31,3 +31,25 @@ export const validateUser = (userData: {
 
   return { isValid, errors };
 };
+export const validateSignIn = (userData: {
+  email: string;
+  password: string;
+}): { isValid: boolean; errors: { [key: string]: string } } => {
+  const errors: { [key: string]: string } = {};
+
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(userData.email)) {
+    errors.email = 'Invalid email address';
+  }
+
+  if (userData.password.trim() === '') {
+    errors.password = 'Password is required';
+  }
+
+  const isValid = Object.keys(errors).length === 0;
+
+  return { isValid, errors };
+};
+export const  validateEmail = (email: string): boolean => {
+
+  return /^\S+@\S+\.\S+$/.test(email);
+};

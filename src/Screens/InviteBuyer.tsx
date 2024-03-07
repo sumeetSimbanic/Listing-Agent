@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, Text, PermissionsAndroid } from 'react-native';
+import { View, StyleSheet, Text, PermissionsAndroid ,Image} from 'react-native';
 import { TextInput, List, Avatar, Button } from 'react-native-paper';
 import Contacts from 'react-native-contacts';
+
 
 const InviteBuyer: React.FC = () => {
   const [search, setSearch] = useState<string>('');
@@ -62,12 +63,18 @@ const InviteBuyer: React.FC = () => {
     <View style={styles.container}>
       <Text style={styles.heading}>Invite Your Contact:</Text>
 
-      <TextInput
-        value={search}
-        label="Search..."
-        onChangeText={(text) => setSearch(text)}
-        style={styles.input}
-      />
+      <View style={{ flexDirection: "row", alignItems: "center", marginLeft: '4%' }}>
+        <Image
+          source={require('../../images/search.png')}
+          style={styles.imageSearch}
+        />
+        <TextInput
+          value={search}
+          label="Search..."
+          onChangeText={text => setSearch(text)}
+          style={styles.input}
+        />
+      </View>
       <View style={styles.listContainer}>
         <List.Section>
           {filteredContacts.map((contact) => (
@@ -106,9 +113,9 @@ const styles = StyleSheet.create({
   input: {
     width: 335,
     height: 48,
-    marginLeft: '4%',
     backgroundColor: 'white',
     color: 'black',
+    paddingLeft:"10%",
     borderRadius: 9,
     borderColor: 'black',
     borderWidth: 1,
@@ -121,6 +128,15 @@ const styles = StyleSheet.create({
 
     color: 'black',
     fontFamily: 'Inria Serif',
+  },
+  imageSearch: {
+    width: 24,
+    height: 24,
+    position: 'absolute',
+    left: 20, // Adjust the position as needed
+    zIndex: 1,
+    top:15
+
   },
   list: {
     width: 430,

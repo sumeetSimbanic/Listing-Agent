@@ -1,50 +1,66 @@
-// UpdateProfile.tsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text } from 'react-native';
-import { TextInput, Button } from 'react-native-paper';
+import { TextInput } from 'react-native-paper';
 import InputField from '../Components/Inputfields';
 import { SignupEntity } from '../types/SignUptypes';
 import SignupStyles from '../styles/SignupStyles';
-import { validateUser } from '../Validations/InputValidation'; 
+import { validateUser } from '../Validations/InputValidation';
 import initialUser from '../states/initial-user';
 import CustomButtonSignup from '../Components/CustomButtonSignup';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from 'axios';
+import jwt_decode from 'jwt-decode'; // Import jwt-decode library for decoding JWT
 
 
 const UpdateProfile: React.FC = ({ navigation }: any) => {
   const [state, setState] = useState<SignupEntity>(initialUser);
   const [isChecked, setChecked] = useState<boolean>(false);
+  const [userId, setUserId] = useState<string | null>(null);
+  const [userData, setUserData] = useState<any>(null); // Assuming user data structure
+const [userToken ,setUserToken]=useState("")
+  useEffect(() => {
+    const retrieveUserIdAndCallApi = async () => {
+      try {
+       
+        const storedToken = await AsyncStorage.getItem('userToken');
+        setUserToken(storedToken);
+        console.log('Stored Token:', storedToken);
+
+        // Call API only if userId is available
+        if (storedUserId) {
+          const response = await axios.get(`http://104.237.141.171:3000/agent/${userId}`, {});
+          setUserData(response.data);
+
+          // Decode JWT token and log the decoded information
+          if (storedToken) {
+            const decodedToken = jwt_decode(storedToken);
+            console.log('Decoded Token:', decodedToken);
+          }
+        }
+      } catch (error) {
+        console.error('Error retrieving userId or making API call:', error);
+      }
+    };
+
+    retrieveUserIdAndCallApi();
+  }, []); 
+
 
   const handleInputChange = (field: keyof SignupEntity, text: string) => {
     setState((prevState) => ({ ...prevState, [field]: text, [`${field}Error`]: '' }));
   };
 
-  const handleSignUp = () => {
-    const { firstName, lastName, mobile, email, password } = state;
-
-    // Use validateUser function to get validation results
-    const validationResult = validateUser({ firstName, lastName, mobile, email, password });
-
-    // Update the error states with validation results
-    setState((prevState) => ({
-      ...prevState,
-      firstNameError: validationResult.errors.firstName || '',
-      lastNameError: validationResult.errors.lastName || '',
-      mobileError: validationResult.errors.mobile || '',
-      emailError: validationResult.errors.email || '',
-      passwordError: validationResult.errors.password || '',
-    }));
-
-    if (validationResult.isValid && isChecked) {
-      console.log('Signing up...');
-      navigation.navigate('Client');
-    } else {
-      console.log('Please fill in all fields correctly and accept the Terms of Service and Privacy Policy.');
-    }
-  };
-
   return (
     <View style={SignupStyles.container}>
-      <Text style={SignupStyles.heading}>Profile...</Text>
+      <Text style={SignupStyles.heading}>Profile</Text>
+
+      {/* Render user data or any other components based on the API response */}
+      {userData && (
+        <View>
+          <Text>User Name: {userData.userName}</Text>
+          {/* Add more fields as needed */}
+        </View>
+      )}
 
       <InputField
         label="First-Name"
@@ -76,17 +92,7 @@ const UpdateProfile: React.FC = ({ navigation }: any) => {
         keyboardType="email-address"
       />
 
-      <InputField
-        label="Password"
-        value={state.password}
-        onChangeText={(text) => handleInputChange('password', text)}
-        error={state.passwordError}
-        secureTextEntry
-      />
-
-  
-      <CustomButtonSignup onPress={handleSignUp} label="SignIn" style={SignupStyles.button} />
-
+      <CustomButtonSignup onPress={() => navigation.navigate('Client')} label="Update Profile" style={SignupStyles.button} />
     </View>
   );
 };

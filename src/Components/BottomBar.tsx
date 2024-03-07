@@ -3,7 +3,7 @@ import { View, StyleSheet, Image } from 'react-native';
 import { Text, BottomNavigation } from 'react-native-paper';
 import Client from '../Screens/Client';
 import UpdateProfile from '../Screens/UpdateProfile';
-import CalenderDayPage from '../Screens/CalenderDayPage';
+import CalenderDayPage from '../Screens/CalenderMainPage';
 import AllProperty from '../Screens/AllProperty';
 
 const BottomBar: React.FC = ({navigation}:any) => {

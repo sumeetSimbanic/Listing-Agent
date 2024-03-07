@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "588795977305",
+    "project_id": "listingagent-c974a",
+    "storage_bucket": "listingagent-c974a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:588795977305:android:00739963ea144b70bf1b48",
+        "android_client_info": {
+          "package_name": "com.listingagent"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCWxC963vY7bx5Nvy9D0h3-PdqmqRlva9s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
